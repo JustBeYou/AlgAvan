@@ -8,13 +8,15 @@ def read(f):
 
 def solve(n, ws):
     T = [[0 for _ in range(n)] for _ in range(n)]
+    moves = [[None for _ in range(n)] for _ in range(n)]
+
     for i in range(n):
+        moves[i][i] = 'left'
         T[i][i] = ws[i]
     for i in range(n-1):
+        if ws[i] >= ws[i+1]: moves[i][i+1] = 'left'
         T[i][i+1] = max(ws[i], ws[i+1])
 
-
-    moves = [[None for _ in range(n)] for _ in range(n)]
     for i, l in product(range(0, n), range(2, n)):
         j = i + l
         if j >= n: break
